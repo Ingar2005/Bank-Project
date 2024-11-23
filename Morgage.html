@@ -25,6 +25,8 @@
         <br>
         <button>Calculate</button>
     </form>
+    <p id="eligiblity"></p>
+
     <script>
 
         $(document).ready(function(){
@@ -34,6 +36,8 @@
                 $("#amountError").text("");
                 $("#termError").text("");
                 $("#incomeError").text("");
+                $("#eligiblity").text("");
+
 
                 const amount = $("#amount").val();
                 const term = $("#term").val();
@@ -42,7 +46,7 @@
                 if(amount < 0  || amount.length === 0){
                     $("#amountError").text("Amount must be a positive number");
                 }
-                if(term < 0  || amount.length === 0){
+                if(term < 0  || term.length === 0){
                     $("#termError").text("Term must be greater than 0");
                 }
                 if(income < 0  || income.length === 0){
@@ -54,6 +58,13 @@
                 const multiplier = (1 + intrestRate)**months;
                 const monthlyPayment = (amount * intrestRate * multiplier) / (multiplier - 1)
                 console.log(monthlyPayment);
+
+                const threshHold = income * 0.30
+                if (monthlyPayment < threshHold){
+                    $("#eligiblity").text("We can gladly accept your request.", montlyPayment, "This will be your monthly payment");
+                    } else {
+                    $("#eligiblity").text("I am sorry but i cannot accept your request please make some more money")
+                }
 
             }
 
